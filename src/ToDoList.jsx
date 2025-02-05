@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import "./todolist.css"
 const ToDoList = () => {
-  const [tasks, setTasks] = useState(["hi", "helo", "sdf"])
+  const [tasks, setTasks] = useState(["Hi", "Helloo"])
   const [newTask, setNewTask] = useState("")
 
   function handleInputChange(event) {
@@ -17,11 +17,31 @@ const ToDoList = () => {
   }
   function deleteTask(index) {
     const updatedTasks = tasks.filter((_, i) => i !== index)
-    // setTasks(deleteTask)
+    setTasks(updatedTasks)
   }
 
-  function moveTaskUp(index) {}
-  function moveTaskdown(index) {}
+  function moveTaskUp(index) {
+    if (index > 0) {
+      const updatedTasks = [...tasks]
+      ;[updatedTasks[index], updatedTasks[index - 1]] = [
+        updatedTasks[index - 1],
+        updatedTasks[index],
+      ]
+
+      setTasks(updatedTasks)
+    }
+  }
+  function moveTaskdown(index) {
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks]
+      ;[updatedTasks[index], updatedTasks[index + 1]] = [
+        updatedTasks[index + 1],
+        updatedTasks[index],
+      ]
+
+      setTasks(updatedTasks)
+    }
+  }
 
   return (
     <div className="to-do-list">
